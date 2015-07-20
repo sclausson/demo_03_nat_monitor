@@ -1,0 +1,19 @@
+- name: Configure nat_monitoring for routing failover
+  hosts: nat_instances
+  gather_facts: False
+  sudo: True
+  tasks:
+    - name: copy nat_monitor.sh script
+      template: >
+        src=templates/nat_monitor.sh.j2
+        dest=/root/nat_monitor.sh
+        mode=0700
+
+    - name: create NAT monitor log failover
+      file: path=/tmp/nat_monitor.log state=touch owner=root group=root mode=0644
+
+    - name: Configure nat_monitor.sh to be started by cron at boot
+      shell: echo '@reboot /root/nat_monitor.sh >> /tmp/nat_monitor.log' | crontab
+
+    - name: Start nat_monitor.sh
+      shell: /root/nat_monitor.sh >> /tmp/nat_monitor.log &

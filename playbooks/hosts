@@ -1,0 +1,6 @@
+[nat_instances]
+ec2-52-3-156-50.compute-1.amazonaws.com	nat_id=i-c6143715	nat_rt_id=rtb-370ef453	my_rt_id=rtb-350ef451
+ec2-52-2-228-127.compute-1.amazonaws.com	nat_id=i-85019c2d	nat_rt_id=rtb-350ef451	my_rt_id=rtb-370ef453
+
+[nat_instances:vars]
+ec2_url=https://ec2.us-east-1.amazonaws.com

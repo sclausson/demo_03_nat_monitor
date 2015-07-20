@@ -1,0 +1,7 @@
+- name: Configure nat_monitoring for routing failover
+  hosts: ec2-52-3-123-200.compute-1.amazonaws.com
+  gather_facts: False
+  sudo: True
+  tasks:
+    - name: Start nat_monitor.sh
+      command: /root/nat_monitor.sh >> /tmp/nat_monitor.log
