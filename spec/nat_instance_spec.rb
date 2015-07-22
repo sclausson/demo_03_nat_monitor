@@ -6,9 +6,10 @@ end
 
 describe file('/tmp/nat_monitor.log') do
   it { should be_writable }
-  its(:size) {should > 0}
+  its(:size) {should > 0} #if file is growing then we infer that monitor is running
 end
 
-describe process("/bin/sh -c ./nat_monitor.sh >> /tmp/nat_monitor.log") do 
+describe service('nat-monitor') do
+  it { should be_enabled }
   it { should be_running }
 end

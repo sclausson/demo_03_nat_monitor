@@ -3,17 +3,30 @@
   gather_facts: False
   sudo: True
   tasks:
-    - name: copy nat_monitor.sh script
+    - name: copy nat_monitor script to /usr/bin
       template: >
-        src=templates/nat_monitor.sh.j2
-        dest=/root/nat_monitor.sh
+        src=templates/nat-monitor.j2
+        dest=/usr/bin/nat-monitor
         mode=0700
 
-    - name: create NAT monitor log failover
-      file: path=/tmp/nat_monitor.log state=touch owner=root group=root mode=0644
+    - name: copy nat_monitor init script
+      copy: > 
+        src=files/nat-monitor 
+        dest=/etc/init.d/nat-monitor 
+        ower=root 
+        group=root 
+        mode=0755
 
-    - name: Configure nat_monitor.sh to be started by cron at boot
-      shell: echo '@reboot /root/nat_monitor.sh >> /tmp/nat_monitor.log' | crontab
+    - name: create NAT monitor log
+      file: > 
+        path=/tmp/nat-monitor.log 
+        state=touch 
+        owner=root 
+        group=root 
+        mode=0644
 
-    - name: Start nat_monitor.sh
-      shell: ./root/nat_monitor.sh >> /tmp/nat_monitor.log &
+    - name: enable nat-monitor service
+      service: name=nat-monitor enabled=yes
+
+    - name: start nat-monitor service
+      service: name=nat-monitor state=started
