@@ -10,5 +10,5 @@ describe file('/tmp/nat_monitor.log') do
 end
 
 describe process("/root/nat_monitor.sh") do 
-  it { should_be running }
+  it { should be_running }
 end
