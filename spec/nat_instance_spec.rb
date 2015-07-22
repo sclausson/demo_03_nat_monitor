@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe file('/root/nat_monitor.sh') do
+describe file('/usr/bin/nat-monitor') do
   it { should be_executable }
 end
 
-describe file('/tmp/nat_monitor.log') do
+describe file('/tmp/nat-monitor.log') do
   it { should be_writable }
-  its(:size) {should > 0} #if file is growing then we infer that monitor is running
+  its(:size) {should > 0}
 end
 
 describe service('nat-monitor') do
