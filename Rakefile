@@ -9,7 +9,7 @@ namespace :spec do
   
   cfn = AWS::CloudFormation.new
   stackname = ENV['STACK_NAME']
-  targets = cfn.stacks[stackname].instances.collect { |i| i.private_ip_address }
+  targets = cfn.stacks[stackname].instances.collect { |name,instance| instance.private_ip_address }
 
   task :all     => targets
   task :default => :all
