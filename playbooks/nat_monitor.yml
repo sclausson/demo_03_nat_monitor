@@ -13,7 +13,7 @@
       copy: > 
         src=files/nat-monitor 
         dest=/etc/init.d/nat-monitor 
-        ower=root 
+        owner=root 
         group=root 
         mode=0755
 
