@@ -16,4 +16,4 @@
       shell: echo '@reboot /root/nat_monitor.sh >> /tmp/nat_monitor.log' | crontab
 
     - name: Start nat_monitor.sh
-      shell: /root/nat_monitor.sh >> /tmp/nat_monitor.log &
+      shell: ./root/nat_monitor.sh >> /tmp/nat_monitor.log &

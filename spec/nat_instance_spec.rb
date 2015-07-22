@@ -9,6 +9,6 @@ describe file('/tmp/nat_monitor.log') do
   its(:size) {should > 0}
 end
 
-describe process("/root/nat_monitor.sh") do 
+describe process("/bin/sh -c ./nat_monitor.sh >> /tmp/nat_monitor.log") do 
   it { should be_running }
 end
